@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const LoginForm = () => {
+// Nhận props onSwitchToRegister và onLoginSuccess từ App.jsx
+const LoginForm = ({ onSwitchToRegister, onLoginSuccess }) => {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -12,9 +13,13 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Gửi API đăng nhập tại đây
+    // TODO: Gửi API đăng nhập tại đây và kiểm tra kết quả
+    // Giả sử đăng nhập thành công:
     alert(`🟢 Đăng nhập thành công với email: ${form.email}`);
     console.log("Login form data:", form);
+    if (onLoginSuccess) {
+      onLoginSuccess(); // Gọi hàm này để App.jsx cập nhật state isLoggedIn
+    }
   };
 
   return (
@@ -62,7 +67,15 @@ const LoginForm = () => {
         </form>
 
         <p className="text-center text-sm text-gray-600 mt-4">
-          Chưa có tài khoản? <a href="#" className="text-blue-500 underline">Đăng ký ngay</a>
+          Chưa có tài khoản?{" "}
+          {/* 👇 THAY ĐỔI: Sử dụng button hoặc a với onClick */}
+          <button
+            type="button" // Quan trọng: để không submit form
+            onClick={onSwitchToRegister} // Gọi hàm được truyền từ App.jsx
+            className="text-blue-500 underline hover:text-blue-700 focus:outline-none"
+          >
+            Đăng ký ngay
+          </button>
         </p>
       </div>
     </div>
