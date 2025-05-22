@@ -66,6 +66,14 @@ export default function Home({ isLoggedIn }) {
               alt="Hair Style 2"
               className="w-full h-[600px] object-cover"
             />
+            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+              <div className="text-white text-center p-4">
+                <h2 className="text-3xl md:text-5xl font-bold mb-4">KIỂU TÓC PHONG CÁCH ÂU MỸ</h2>
+                <p className="text-lg md:text-xl">
+                  Lịch lãm, cá tính – lựa chọn của doanh nhân và giới trẻ năng động.
+                </p>
+              </div>
+            </div>
           </div>
           <div className="relative">
             <img
@@ -73,6 +81,14 @@ export default function Home({ isLoggedIn }) {
               alt="Hair Style 3"
               className="w-full h-[600px] object-cover"
             />
+            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+              <div className="text-white text-center p-4">
+                <h2 className="text-3xl md:text-5xl font-bold mb-4">TOP 10 KIỂU TÓC HOT NHẤT</h2>
+                <p className="text-lg md:text-xl">
+                  Xu hướng tóc nam 2025 – bạn chọn kiểu nào để bứt phá cá tính?
+                </p>
+              </div>
+            </div>
           </div>
         </Carousel>
       </section>
@@ -115,14 +131,14 @@ export default function Home({ isLoggedIn }) {
         <h3 className="text-xl font-semibold text-blue-700 mb-4 border-l-4 border-blue-700 pl-2">DỊCH VỤ TÓC</h3>
         <div className="grid md:grid-cols-3 gap-4">
           <div className="bg-white shadow rounded overflow-hidden text-center">
-            <img src="https://30shine.com/static/media/cat-toc.042077d4.png" className="w-full h-48 object-cover" alt="Cắt tóc" />
+            <img src="https://club.petitpoo.com/wp-content/uploads/2023/08/Shealsy-1-15.jpg" className="w-full h-48 object-cover" alt="Cắt tóc" />
             <div className="p-3">
               <h4 className="font-semibold">Cắt tóc</h4>
               <a href="#" className="text-blue-600 text-sm">Tìm hiểu thêm →</a>
             </div>
           </div>
           <div className="bg-white shadow rounded overflow-hidden text-center">
-            <img src="https://30shine.com/static/media/uon.1c034be3.png" className="w-full h-48 object-cover" alt="Uốn định hình" />
+            <img src="https://th.bing.com/th/id/OIP.YlDS15bq1tLkksrh6d3UpwHaI3?w=1080&h=1293&rs=1&pid=ImgDetMain" className="w-full h-48 object-cover" alt="Uốn định hình" />
             <div className="p-3">
               <h4 className="font-semibold">Uốn định hình</h4>
               <p className="text-sm text-gray-600">Giá từ 379.000VNĐ</p>
@@ -130,7 +146,7 @@ export default function Home({ isLoggedIn }) {
             </div>
           </div>
           <div className="bg-white shadow rounded overflow-hidden text-center">
-            <img src="https://30shine.com/static/media/nhuom.b470fd6f.png" className="w-full h-48 object-cover" alt="Thay đổi màu tóc" />
+            <img src="https://th.bing.com/th/id/OIP.Fmcu7TOM8glFpKM9oZm1PQHaFj?rs=1&pid=ImgDetMain" className="w-full h-48 object-cover" alt="Thay đổi màu tóc" />
             <div className="p-3">
               <h4 className="font-semibold">Thay đổi màu tóc</h4>
               <p className="text-sm text-gray-600">Giá từ 199.000VNĐ</p>
@@ -144,7 +160,7 @@ export default function Home({ isLoggedIn }) {
         <h3 className="text-xl font-semibold text-blue-700 mb-4 border-l-4 border-blue-700 pl-2">TIN TỨC</h3>
         <div className="grid md:grid-cols-3 gap-4">
           <div className="bg-white shadow rounded overflow-hidden">
-            <img src="https://source.unsplash.com/featured/?hair,style" className="w-full h-40 object-cover" alt="News 1" />
+            <img src="https://tutinphaidep.com/wp-content/uploads/2022/08/kieu-toc-nam-french-crop-ngan.jpg" className="w-full h-40 object-cover" alt="News 1" />
             <div className="p-3">
               <h4 className="font-semibold mb-1">Xu hướng tóc nam 2025</h4>
               <p className="text-sm text-gray-600 mb-2">Cập nhật nhanh các kiểu tóc hot nhất năm 2025 dành cho phái mạnh.</p>
@@ -152,7 +168,7 @@ export default function Home({ isLoggedIn }) {
             </div>
           </div>
           <div className="bg-white shadow rounded overflow-hidden">
-            <img src="https://source.unsplash.com/featured/?barber" className="w-full h-40 object-cover" alt="News 2" />
+            <img src="https://cdn.nhathuoclongchau.com.vn/unsafe/800x0/https://cms-prod.s3-sgn09.fptcloud.com/meo_cham_soc_toc_nam_hieu_qua_va_cuc_ky_don_gian_tai_nha_2_4030b55e2a.png" className="w-full h-40 object-cover" alt="News 2" />
             <div className="p-3">
               <h4 className="font-semibold mb-1">30 mẹo giữ tóc khoẻ đẹp</h4>
               <p className="text-sm text-gray-600 mb-2">Chia sẻ các bí quyết từ chuyên gia giúp giữ mái tóc khoẻ mạnh và cuốn hút.</p>
@@ -160,7 +176,7 @@ export default function Home({ isLoggedIn }) {
             </div>
           </div>
           <div className="bg-white shadow rounded overflow-hidden">
-            <img src="https://source.unsplash.com/featured/?haircut" className="w-full h-40 object-cover" alt="News 3" />
+            <img src="https://media.canva.com/v2/image-resize/format:JPG/height:452/quality:92/uri:ifs%3A%2F%2FM%2Faea3789c-9ace-4106-8ed0-7c94e76dd863/watermark:F/width:800?csig=AAAAAAAAAAAAAAAAAAAAAHVwMWVFBAkrwUKsVTgN63PNQJnSyUcgs1yTA8zOAHDe&exp=1747957915&osig=AAAAAAAAAAAAAAAAAAAAAHIMIXUmcNDOoLUwUEnUTAyH9vqXuxdPC2gW3fblo7at&signer=media-rpc&x-canva-quality=screen" className="w-full h-40 object-cover" alt="News 3" />
             <div className="p-3">
               <h4 className="font-semibold mb-1">Giảm giá dịch vụ cuối tuần</h4>
               <p className="text-sm text-gray-600 mb-2">Khuyến mãi hấp dẫn lên tới 50% cho các dịch vụ vào thứ 6 - 7 - CN.</p>
