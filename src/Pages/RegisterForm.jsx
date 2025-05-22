@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const RegisterForm = () => {
+// Nhận prop onSwitchToLogin từ App.jsx
+const RegisterForm = ({ onSwitchToLogin }) => {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -25,6 +26,10 @@ const RegisterForm = () => {
     // TODO: gửi dữ liệu đăng ký lên API
     alert(`✅ Đăng ký thành công cho ${form.name}`);
     console.log("Register form data:", form);
+    // Sau khi đăng ký thành công, có thể bạn muốn tự động chuyển về form login
+    if (onSwitchToLogin) {
+        onSwitchToLogin(); // Gọi hàm này để App.jsx đổi mode về "login"
+    }
   };
 
   return (
@@ -100,7 +105,15 @@ const RegisterForm = () => {
         </form>
 
         <p className="text-center text-sm text-gray-600 mt-4">
-          Đã có tài khoản? <a href="#" className="text-blue-500 underline">Đăng nhập</a>
+          Đã có tài khoản?{" "}
+          {/* 👇 THAY ĐỔI: Sử dụng button hoặc a với onClick */}
+          <button
+            type="button" // Quan trọng: để không submit form
+            onClick={onSwitchToLogin} // Gọi hàm được truyền từ App.jsx
+            className="text-blue-500 underline hover:text-blue-700 focus:outline-none"
+          >
+            Đăng nhập
+          </button>
         </p>
       </div>
     </div>
