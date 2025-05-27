@@ -10,6 +10,7 @@ import {
 import Home from "./Pages/Home";
 import LoginForm from "./Pages/LoginForm";
 import RegisterForm from "./Pages/RegisterForm";
+import Detail from "./Pages/Detail";
 
 // Wrapper để dùng useNavigate
 function AppContent() {
@@ -40,6 +41,7 @@ function AppContent() {
           !isLoggedIn ? <RegisterForm /> : <Navigate replace to="/" />
         }
       />
+      <Route path="/detail" element={<Detail />} />
       <Route path="*" element={<Navigate replace to="/" />} />
     </Routes>
   );

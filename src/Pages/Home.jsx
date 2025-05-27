@@ -13,17 +13,18 @@ export default function Home({ isLoggedIn }) {
     setShowBooking(true);
   };
 
+
   return (
     <div className="min-h-screen bg-white font-sans">
       {/* Header */}
       <header className="flex justify-between items-center p-4 shadow-md">
         <div className="text-xl font-bold text-blue-600 flex items-center">
-          <img src="/logo.png" alt="TLap Logo" className="h-10 mr-2" />
+          <img src="C:\barbershop\logo.png" alt="TLap Logo" className="h-10 mr-2" />
           TLap
         </div>
         <nav className="hidden md:flex gap-6 text-gray-700">
           <a href="#" className="hover:text-blue-500">Trang chủ</a>
-          <a href="#" className="hover:text-blue-500">Về TLap</a>
+          <Link to="/detail" className="hover:text-blue-500">Về TLap</Link>
           <a href="#" className="hover:text-blue-500">Nhượng quyền</a>
           <a href="#" className="hover:text-blue-500">Đối tác</a>
           <a href="#" className="hover:text-blue-500">Nụ cười DV</a>
@@ -187,10 +188,15 @@ export default function Home({ isLoggedIn }) {
       </section>
 
       {/* Footer Call/Arrow */}
-      {/* Footer Call/Arrow */}
-      <div className="fixed right-4 bottom-4 flex flex-col gap-3">
-        <Button className="rounded-full p-3 shadow-md">⬆</Button>
-        <Button className="rounded-full p-3 shadow-md">📞</Button>
+      <div className="fixed right-6 bottom-6 z-50 flex flex-col items-end gap-3">
+        <button className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition duration-300">
+          🔝 Lên đầu
+        </button>
+        <a href="tel:1900272703">
+          <button className="bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition duration-300">
+            ☎ Gọi ngay
+          </button>
+        </a>
       </div>
 
       {/* Footer Info */}
