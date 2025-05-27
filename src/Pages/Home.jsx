@@ -10,16 +10,17 @@ export default function Home({ isLoggedIn }) {
   const [showBooking, setShowBooking] = useState(false);
 
   const handleShowBooking = () => {
-    setShowBooking(true);
+    setShowBooking(prev => !prev);
   };
 
+  
 
   return (
     <div className="min-h-screen bg-white font-sans">
       {/* Header */}
       <header className="flex justify-between items-center p-4 shadow-md">
         <div className="text-xl font-bold text-blue-600 flex items-center">
-          <img src="C:\barbershop\logo.png" alt="TLap Logo" className="h-10 mr-2" />
+          <img src="logo.png" alt="TLap Logo" className="h-10 mr-2" />
           TLap
         </div>
         <nav className="hidden md:flex gap-6 text-gray-700">
@@ -109,7 +110,7 @@ export default function Home({ isLoggedIn }) {
                   placeholder="Nhập SĐT để đặt lịch"
                   className="border p-2 rounded w-full max-w-xs"
                 />
-                <Button>Đặt lịch ngay</Button>
+                <Button onClick={handleShowBooking}>Đặt lịch ngay</Button>
               </div>
             )}
             {/* Đánh giá nhỏ gọn bên dưới */}
@@ -120,7 +121,7 @@ export default function Home({ isLoggedIn }) {
             </div>
           </Card>
         </div>
-        {isLoggedIn && showBooking && (
+        {showBooking && (
           <div className="mt-6">
             <BookingForm />
           </div>

@@ -29,7 +29,11 @@ function AppContent() {
         path="/login"
         element={
           !isLoggedIn ? (
-            <LoginForm onLoginSuccess={handleLoginSuccess} />
+            <LoginForm 
+            onLoginSuccess={handleLoginSuccess} 
+            onSwitchToRegister={() => navigate("/register")}
+            />
+            
           ) : (
             <Navigate replace to="/" />
           )
@@ -39,6 +43,7 @@ function AppContent() {
         path="/register"
         element={
           !isLoggedIn ? <RegisterForm /> : <Navigate replace to="/" />
+
         }
       />
       <Route path="/detail" element={<Detail />} />

@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 export default function Detail() {
   return (
-    <div className="bg-gray-50 text-gray-800 font-sans px-6 md:px-20 py-10">
+    <div className="bg-gray-50 text-gray-800 font-sans">
       {/* Header */}
-      <header className="flex justify-between items-center mb-12 border-b pb-4">
+      <header className="flex justify-between items-center px-6 md:px-20 py-6 border-b">
         <div className="text-3xl font-extrabold text-blue-700">TLap</div>
         <nav className="flex space-x-3">
           <Link
@@ -24,9 +24,9 @@ export default function Detail() {
       </header>
 
       {/* Section 1: Giới thiệu */}
-      <section className="mb-14 max-w-4xl mx-auto">
+      <section className="mb-14 max-w-4xl mx-auto px-6 md:px-0 pt-10">
         <h2 className="text-2xl font-bold text-blue-700 mb-3 border-l-4 pl-3 border-blue-700">
-          TLAP - ĐIỂM TỰA CHO VIỆC LỚN
+          TLAP - ĐIỂM TỰA CHO VIỆC LỐN
         </h2>
         <blockquote className="italic text-gray-600 mb-4">
           "Hãy cho tôi một điểm tựa, tôi sẽ nâng cả thế giới." – Archimedes
@@ -46,7 +46,7 @@ export default function Detail() {
       </section>
 
       {/* Image */}
-      <section className="flex justify-center mb-14">
+      <section className="flex justify-center mb-14 px-6">
         <img
           src="https://uniquekiosk.com/wp-content/uploads/2022/11/barber-shop-2-scaled.jpg"
           alt="TLap Barber"
@@ -55,9 +55,9 @@ export default function Detail() {
       </section>
 
       {/* Section 2: Ý nghĩa kiểu tóc */}
-      <section className="max-w-4xl mx-auto">
+      <section className="max-w-4xl mx-auto mb-20 px-6 md:px-0">
         <h2 className="text-2xl font-bold text-blue-700 mb-3 border-l-4 pl-3 border-blue-700">
-          KIỂU TÓC ĐẸP KHÔNG PHẢI ĐÍCH ĐẾN – MÀ LÀ ĐIỂM KHỞI ĐẦU
+          KIỂU TÓC ĐỌP KHÔNG PHẢI ĐÍCH ĐẾN – MÀ LÀ ĐIỂM KHỞI ĐẦU
         </h2>
         <div className="space-y-3 text-lg leading-relaxed">
           <p>Một kiểu tóc đẹp không chỉ để ngắm nhìn – mà còn để cảm nhận:</p>
@@ -72,6 +72,48 @@ export default function Detail() {
           </p>
         </div>
       </section>
+
+      {/* Footer Full Width */}
+      <footer className="w-full bg-blue-800 text-white text-sm pt-10 pb-6 px-6 md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 border-t border-white/30 pt-6">
+          <div>
+            <p className="font-semibold mb-2">Về chúng tôi</p>
+            <ul className="space-y-1 text-white/90">
+              <li><a href="#" className="hover:underline">TLAP Shop</a></li>
+              <li><a href="#" className="hover:underline">Học cắt tóc</a></li>
+            </ul>
+          </div>
+          <div>
+            <p className="font-semibold mb-2">Liên hệ</p>
+            <ul className="space-y-1 text-white/90">
+              <li>Hotline (1.000đ/phút): 1900.27.27.03</li>
+              <li>Học nghề tóc: 0967.86.3030</li>
+              <li>Nhượng quyền & quảng cáo</li>
+            </ul>
+          </div>
+          <div>
+            <p className="font-semibold mb-2">Thông tin</p>
+            <ul className="space-y-1 text-white/90">
+              <li>Giờ phục vụ: T2 - CN (8h30 - 20h30)</li>
+              <li>Chính sách bảo mật</li>
+              <li>Điều kiện giao dịch</li>
+              <li>Giấy phép giáo dục nghề</li>
+            </ul>
+          </div>
+          <div>
+            <p className="font-semibold mb-2">Tham gia cộng đồng 2.5 triệu thành viên</p>
+            <div className="flex items-center space-x-3 text-white/90 mt-2">
+              <span className="text-red-400">📻 1300k</span>
+              <span className="text-yellow-300">👍 200k</span>
+            </div>
+          </div>
+        </div>
+
+        <p className="text-center text-white/60 mt-6 text-xs">
+          © 2024 TLap / Địa chỉ: 82 Trần Đại Nghĩa, Đồng Tâm, Q. Hai Bà Trưng, HN /
+          GPDKKD số 010.7467.693 do Sở KHĐT TP.HN cấp ngày 08/06/2016
+        </p>
+      </footer>
     </div>
   );
 }

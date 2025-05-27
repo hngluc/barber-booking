@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // ✅ Thêm useNavigate
 
-const RegisterForm = ({ onSwitchToLogin }) => {
+const RegisterForm = () => {
+  const navigate = useNavigate(); // ✅ Khởi tạo navigate
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -24,7 +26,7 @@ const RegisterForm = ({ onSwitchToLogin }) => {
 
     alert(`✅ Đăng ký thành công cho ${form.name}`);
     console.log("Register form data:", form);
-    if (onSwitchToLogin) onSwitchToLogin();
+    navigate("/login"); // ✅ Chuyển hướng sau khi đăng ký
   };
 
   return (
@@ -87,7 +89,7 @@ const RegisterForm = ({ onSwitchToLogin }) => {
         <p className="text-center text-sm text-gray-600">
           Đã có tài khoản?{" "}
           <button
-            onClick={onSwitchToLogin}
+            onClick={() => navigate("/login")} // ✅ Chuyển hướng khi bấm nút
             className="text-blue-600 hover:underline font-medium"
             type="button"
           >
