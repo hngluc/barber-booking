@@ -10,16 +10,17 @@ export default function Home({ isLoggedIn }) {
   const [showBooking, setShowBooking] = useState(false);
 
   const handleShowBooking = () => {
-    setShowBooking(true);
+    setShowBooking(prev => !prev);
   };
 
+  
 
   return (
     <div className="min-h-screen bg-white font-sans">
       {/* Header */}
       <header className="flex justify-between items-center p-4 shadow-md">
         <div className="text-xl font-bold text-blue-600 flex items-center">
-          <img src="C:\barbershop\logo.png" alt="TLap Logo" className="h-10 mr-2" />
+          <img src="logo.png" alt="TLap Logo" className="h-10 mr-2" />
           TLap
         </div>
         <nav className="hidden md:flex gap-6 text-gray-700">
@@ -109,7 +110,7 @@ export default function Home({ isLoggedIn }) {
                   placeholder="Nhập SĐT để đặt lịch"
                   className="border p-2 rounded w-full max-w-xs"
                 />
-                <Button>Đặt lịch ngay</Button>
+                <Button onClick={handleShowBooking}>Đặt lịch ngay</Button>
               </div>
             )}
             {/* Đánh giá nhỏ gọn bên dưới */}
@@ -120,7 +121,7 @@ export default function Home({ isLoggedIn }) {
             </div>
           </Card>
         </div>
-        {isLoggedIn && showBooking && (
+        {showBooking && (
           <div className="mt-6">
             <BookingForm />
           </div>
@@ -165,7 +166,14 @@ export default function Home({ isLoggedIn }) {
             <div className="p-3">
               <h4 className="font-semibold mb-1">Xu hướng tóc nam 2025</h4>
               <p className="text-sm text-gray-600 mb-2">Cập nhật nhanh các kiểu tóc hot nhất năm 2025 dành cho phái mạnh.</p>
-              <a href="#" className="text-blue-600 text-sm">Xem thêm →</a>
+              <a
+                href="https://menitems.vn/blogs/xu-huong-lam-dep-nam-gioi/top-30-kieu-toc-nam-dep-nhat-2025-xu-huong-hot-trend"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 text-sm"
+                >
+                Xem thêm →
+              </a>
             </div>
           </div>
           <div className="bg-white shadow rounded overflow-hidden">
@@ -173,7 +181,14 @@ export default function Home({ isLoggedIn }) {
             <div className="p-3">
               <h4 className="font-semibold mb-1">30 mẹo giữ tóc khoẻ đẹp</h4>
               <p className="text-sm text-gray-600 mb-2">Chia sẻ các bí quyết từ chuyên gia giúp giữ mái tóc khoẻ mạnh và cuốn hút.</p>
-              <a href="#" className="text-blue-600 text-sm">Xem thêm →</a>
+              <a
+                href="https://eva.vn/suc-khoe/bi-kip-giu-gin-suc-khoe-va-sac-dep-phu-nu-tuoi-30-c131a404709.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 text-sm"
+                >
+                Xem thêm →
+              </a>
             </div>
           </div>
           <div className="bg-white shadow rounded overflow-hidden">
