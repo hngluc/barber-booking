@@ -166,7 +166,14 @@ export default function Home({ isLoggedIn }) {
             <div className="p-3">
               <h4 className="font-semibold mb-1">Xu hướng tóc nam 2025</h4>
               <p className="text-sm text-gray-600 mb-2">Cập nhật nhanh các kiểu tóc hot nhất năm 2025 dành cho phái mạnh.</p>
-              <a href="#" className="text-blue-600 text-sm">Xem thêm →</a>
+              <a
+                href="https://menitems.vn/blogs/xu-huong-lam-dep-nam-gioi/top-30-kieu-toc-nam-dep-nhat-2025-xu-huong-hot-trend"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 text-sm"
+                >
+                Xem thêm →
+              </a>
             </div>
           </div>
           <div className="bg-white shadow rounded overflow-hidden">
@@ -174,7 +181,14 @@ export default function Home({ isLoggedIn }) {
             <div className="p-3">
               <h4 className="font-semibold mb-1">30 mẹo giữ tóc khoẻ đẹp</h4>
               <p className="text-sm text-gray-600 mb-2">Chia sẻ các bí quyết từ chuyên gia giúp giữ mái tóc khoẻ mạnh và cuốn hút.</p>
-              <a href="#" className="text-blue-600 text-sm">Xem thêm →</a>
+              <a
+                href="https://eva.vn/suc-khoe/bi-kip-giu-gin-suc-khoe-va-sac-dep-phu-nu-tuoi-30-c131a404709.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 text-sm"
+                >
+                Xem thêm →
+              </a>
             </div>
           </div>
           <div className="bg-white shadow rounded overflow-hidden">
