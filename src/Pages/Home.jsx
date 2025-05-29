@@ -136,7 +136,8 @@ export default function Home({ isLoggedIn }) {
             <img src="https://club.petitpoo.com/wp-content/uploads/2023/08/Shealsy-1-15.jpg" className="w-full h-48 object-cover" alt="Cắt tóc" />
             <div className="p-3">
               <h4 className="font-semibold">Cắt tóc</h4>
-              <a href="#" className="text-blue-600 text-sm">Tìm hiểu thêm →</a>
+              <p className="text-sm text-gray-600">Giá từ 50.000VNĐ</p>
+                <Link to="/service/cat-toc" className="text-blue-600 text-sm">Tìm hiểu thêm →</Link>
             </div>
           </div>
           <div className="bg-white shadow rounded overflow-hidden text-center">
@@ -144,7 +145,7 @@ export default function Home({ isLoggedIn }) {
             <div className="p-3">
               <h4 className="font-semibold">Uốn định hình</h4>
               <p className="text-sm text-gray-600">Giá từ 379.000VNĐ</p>
-              <a href="#" className="text-blue-600 text-sm">Tìm hiểu thêm →</a>
+              <Link to="/service/uon-dinh-hinh" className="text-blue-600 text-sm">Tìm hiểu thêm</Link>
             </div>
           </div>
           <div className="bg-white shadow rounded overflow-hidden text-center">
@@ -152,7 +153,7 @@ export default function Home({ isLoggedIn }) {
             <div className="p-3">
               <h4 className="font-semibold">Thay đổi màu tóc</h4>
               <p className="text-sm text-gray-600">Giá từ 199.000VNĐ</p>
-              <a href="#" className="text-blue-600 text-sm">Tìm hiểu thêm →</a>
+              <Link to="/service/thay-doi-mau" className="text-blue-600 text-sm">T hiểu thêm →</Link>
             </div>
           </div>
         </div>

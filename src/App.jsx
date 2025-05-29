@@ -4,15 +4,15 @@ import {
   Routes,
   Route,
   Navigate,
-  useNavigate
+  useNavigate,
 } from 'react-router-dom';
 
 import Home from "./Pages/Home";
 import LoginForm from "./Pages/LoginForm";
 import RegisterForm from "./Pages/RegisterForm";
 import Detail from "./Pages/Detail";
+import ServiceDetail from "./Pages/ServiceDetail";
 
-// Wrapper để dùng useNavigate
 function AppContent() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -29,11 +29,10 @@ function AppContent() {
         path="/login"
         element={
           !isLoggedIn ? (
-            <LoginForm 
-            onLoginSuccess={handleLoginSuccess} 
-            onSwitchToRegister={() => navigate("/register")}
+            <LoginForm
+              onLoginSuccess={handleLoginSuccess}
+              onSwitchToRegister={() => navigate("/register")}
             />
-            
           ) : (
             <Navigate replace to="/" />
           )
@@ -42,17 +41,20 @@ function AppContent() {
       <Route
         path="/register"
         element={
-          !isLoggedIn ? <RegisterForm /> : <Navigate replace to="/" />
-
+          !isLoggedIn ? (
+            <RegisterForm onSwitchToLogin={() => navigate("/login")} />
+          ) : (
+            <Navigate replace to="/" />
+          )
         }
       />
       <Route path="/detail" element={<Detail />} />
+      <Route path="/service/:serviceId" element={<ServiceDetail />} />
       <Route path="*" element={<Navigate replace to="/" />} />
     </Routes>
   );
 }
 
-// App chính
 function App() {
   return (
     <Router>
