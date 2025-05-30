@@ -9,12 +9,12 @@ export const services = [
       {
         name: 'Cắt gội khoang thường gia',
         duration: '50 phút',
-        image: 'https://link-image-1.jpg',
+        image: 'https://image.luatvietnam.vn/uploaded/twebp/images/original/2021/08/17/mo-quan-cat-toc-co-can-dang-ky-kinh-doanh_1708153637.jpeg',
       },
       {
         name: 'Cắt gội Combo 1',
         duration: '45 phút',
-        image: 'https://link-image-2.jpg',
+        image: 'https://th.bing.com/th/id/OIP.lu-FKCwqZP3XinUsR-zc4gHaE8?rs=1&pid=ImgDetMain',
       },
     ],
   },
@@ -27,7 +27,7 @@ export const services = [
       {
         name: 'Uốn xoăn layer',
         duration: '70 phút',
-        image: 'https://link-image-3.jpg',
+        image: 'https://th.bing.com/th/id/OIP.IjquCroe9flSS6_QbSuBMQHaEm?rs=1&pid=ImgDetMain',
       },
     ],
   },
