@@ -12,6 +12,7 @@ import LoginForm from "./Pages/LoginForm";
 import RegisterForm from "./Pages/RegisterForm";
 import Detail from "./Pages/Detail";
 import ServiceDetail from "./Pages/ServiceDetail";
+import BookingForm from "./Pages/BookingForm";
 
 function AppContent() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,7 +51,7 @@ function AppContent() {
       />
       <Route path="/detail" element={<Detail />} />
       <Route path="/service/:serviceId" element={<ServiceDetail />} />
-      <Route path="*" element={<Navigate replace to="/" />} />
+      <Route path="/booking" element={<BookingForm />} />
     </Routes>
   );
 }
