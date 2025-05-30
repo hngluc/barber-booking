@@ -2,10 +2,13 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { services } from '../data/services';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function ServiceDetail() {
   const { serviceId } = useParams();
   const service = services.find((s) => s.id === serviceId);
+  const navigate = useNavigate();
 
   if (!service) return <div className="p-10 text-center text-red-500">Không tìm thấy dịch vụ</div>;
 
@@ -20,9 +23,11 @@ export default function ServiceDetail() {
             <img src={combo.image} alt={combo.name} className="w-full h-48 object-cover rounded mb-4" />
             <h3 className="text-xl font-semibold mb-1">{combo.name}</h3>
             <p className="text-gray-500">{combo.duration}</p>
-            <button className="mt-3 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-              Đặt ngay
-            </button>
+            <button
+              onClick={() => navigate(`/booking`)}
+              className="mt-3 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+             Đặt ngay
+          </button>
           </div>
         ))}
       </div>
