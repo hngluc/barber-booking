@@ -57,7 +57,7 @@ export default function Detail() {
       {/* Section 2: Ý nghĩa kiểu tóc */}
       <section className="max-w-4xl mx-auto mb-20 px-6 md:px-0">
         <h2 className="text-2xl font-bold text-blue-700 mb-3 border-l-4 pl-3 border-blue-700">
-          KIỂU TÓC ĐỌP KHÔNG PHẢI ĐÍCH ĐẾN – MÀ LÀ ĐIỂM KHỞI ĐẦU
+          KIỂU TÓC ĐẸP KHÔNG PHẢI ĐÍCH ĐẾN – MÀ LÀ ĐIỂM KHỞI ĐẦU
         </h2>
         <div className="space-y-3 text-lg leading-relaxed">
           <p>Một kiểu tóc đẹp không chỉ để ngắm nhìn – mà còn để cảm nhận:</p>

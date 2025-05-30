@@ -1,19 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card } from "../components/ui/card";
 import { Button } from "../components/ui/button";
-import { Link } from "react-router-dom";
-import BookingForm from "../components/BookingForm";
+import { Link, useNavigate } from "react-router-dom";
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 export default function Home({ isLoggedIn }) {
-  const [showBooking, setShowBooking] = useState(false);
+  const navigate = useNavigate();
 
   const handleShowBooking = () => {
-    setShowBooking(prev => !prev);
+    navigate("/booking");
   };
-
-  
 
   return (
     <div className="min-h-screen bg-white font-sans">
@@ -95,25 +92,14 @@ export default function Home({ isLoggedIn }) {
         </Carousel>
       </section>
 
-      {/* Booking + Rating Section */}
+      {/* Booking section */}
       <section className="p-6 md:p-12 text-center">
         <div className="max-w-xl mx-auto">
           <Card className="p-6 shadow-lg">
             <h3 className="text-xl font-semibold mb-4 text-blue-700">ĐẶT LỊCH GIỮ CHỖ CHỈ 30 GIÂY</h3>
             <p className="text-sm text-gray-600 mb-4">Cắt xong trả tiền, huỷ lịch không sao</p>
-            {isLoggedIn ? (
-              <Button onClick={handleShowBooking}>Đặt lịch ngay</Button>
-            ) : (
-              <div className="flex gap-2 justify-center mb-4">
-                <input
-                  type="tel"
-                  placeholder="Nhập SĐT để đặt lịch"
-                  className="border p-2 rounded w-full max-w-xs"
-                />
-                <Button onClick={handleShowBooking}>Đặt lịch ngay</Button>
-              </div>
-            )}
-            {/* Đánh giá nhỏ gọn bên dưới */}
+            <Button onClick={handleShowBooking}>Đặt lịch ngay</Button>
+
             <div className="mt-4 p-3 bg-gray-100 rounded">
               <h4 className="font-semibold text-blue-700 text-sm mb-1">MỜI ANH ĐÁNH GIÁ CHẤT LƯỢNG</h4>
               <p className="text-xs text-gray-600">Phản hồi của anh sẽ giúp chúng em cải thiện tốt hơn</p>
@@ -121,11 +107,6 @@ export default function Home({ isLoggedIn }) {
             </div>
           </Card>
         </div>
-        {showBooking && (
-          <div className="mt-6">
-            <BookingForm />
-          </div>
-        )}
       </section>
 
       {/* Dịch vụ tóc */}
@@ -183,7 +164,7 @@ export default function Home({ isLoggedIn }) {
               <h4 className="font-semibold mb-1">30 mẹo giữ tóc khoẻ đẹp</h4>
               <p className="text-sm text-gray-600 mb-2">Chia sẻ các bí quyết từ chuyên gia giúp giữ mái tóc khoẻ mạnh và cuốn hút.</p>
               <a
-                href="https://eva.vn/suc-khoe/bi-kip-giu-gin-suc-khoe-va-sac-dep-phu-nu-tuoi-30-c131a404709.html"
+                href="https://lamdeptaitiem.com/tu-van-toc-dep/tu-van-cham-soc-toc/meo-giu-toc-khoe-manh-ma-khong-phai-cat-qua-nhieu-bi-quyet-tu-chuyen-gia-toc/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 text-sm"
