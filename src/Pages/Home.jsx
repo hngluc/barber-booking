@@ -134,7 +134,7 @@ export default function Home({ isLoggedIn }) {
             <div className="p-3">
               <h4 className="font-semibold">Thay đổi màu tóc</h4>
               <p className="text-sm text-gray-600">Giá từ 199.000VNĐ</p>
-              <Link to="/service/thay-doi-mau" className="text-blue-600 text-sm">T hiểu thêm →</Link>
+              <Link to="/service/thay-doi-mau" className="text-blue-600 text-sm">Tìm hiểu thêm →</Link>
             </div>
           </div>
         </div>
