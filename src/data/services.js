@@ -40,7 +40,7 @@ export const services = [
       {
         name: 'Nhuộm bạc khói',
         duration: '60 phút',
-        image: 'https://link-image-4.jpg',
+        image: 'https://th.bing.com/th/id/OIP.Ym3EdgmPSwKwP5lzfCeHvwHaHa?rs=1&pid=ImgDetMain',
       },
     ],
   },
