@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { Carousel } from 'react-responsive-carousel';
+import Header from "../components/Header";
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-export default function Home({ isLoggedIn }) {
+export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [role, setRole] = useState(null);
   const navigate = useNavigate();
+
+  // Kiểm tra token trong localStorage khi load trang
+  useEffect(() => {
+  const token = localStorage.getItem("token");
+  const userRole = localStorage.getItem("role");
+  setIsLoggedIn(!!token);
+  setRole(userRole);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role"); // nếu có
+    setIsLoggedIn(false);
+    navigate("/"); // Quay lại Home
+  };
 
   const handleShowBooking = () => {
     navigate("/booking");
@@ -14,24 +32,6 @@ export default function Home({ isLoggedIn }) {
 
   return (
     <div className="min-h-screen bg-white font-sans">
-      {/* Header */}
-      <header className="flex justify-between items-center p-4 shadow-md">
-        <div className="text-xl font-bold text-blue-600 flex items-center">
-          <img src="logo.png" alt="TLap Logo" className="h-10 mr-2" />
-          TLap
-        </div>
-        <nav className="hidden md:flex gap-6 text-gray-700">
-          <a href="#" className="hover:text-blue-500">Trang chủ</a>
-          <Link to="/detail" className="hover:text-blue-500">Về TLap</Link>
-          <a href="#" className="hover:text-blue-500">Nhượng quyền</a>
-          <a href="#" className="hover:text-blue-500">Đối tác</a>
-          <a href="#" className="hover:text-blue-500">Nụ cười DV</a>
-        </nav>
-        <Link to="/login">
-          <Button className="ml-4">Đăng nhập</Button>
-        </Link>
-      </header>
-
       {/* Hero Section with Large Carousel and Overlay Text */}
       <section className="relative">
         <Carousel

@@ -4,24 +4,6 @@ import { Link } from "react-router-dom";
 export default function Detail() {
   return (
     <div className="bg-gray-50 text-gray-800 font-sans">
-      {/* Header */}
-      <header className="flex justify-between items-center px-6 md:px-20 py-6 border-b">
-        <div className="text-3xl font-extrabold text-blue-700">TLap</div>
-        <nav className="flex space-x-3">
-          <Link
-            to="/"
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-          >
-            Trang chủ
-          </Link>
-          <Link
-            to="/login"
-            className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-900 transition"
-          >
-            Đăng nhập
-          </Link>
-        </nav>
-      </header>
 
       {/* Section 1: Giới thiệu */}
       <section className="mb-14 max-w-4xl mx-auto px-6 md:px-0 pt-10">

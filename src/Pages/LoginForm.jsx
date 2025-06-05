@@ -2,15 +2,56 @@ import React, { useState } from "react";
 
 const LoginForm = ({ onLoginSuccess, onSwitchToRegister }) => {
   const [form, setForm] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`🟢 Đăng nhập thành công: ${form.email}`);
-    if (onLoginSuccess) onLoginSuccess();
+    setLoading(true);
+
+    try {
+      // Bước 1: Gửi yêu cầu đăng nhập
+      const response = await fetch("http://localhost:8080/api/v1/auth/authenticate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.message || "Đăng nhập thất bại.");
+      }
+
+      const data = await response.json();
+      localStorage.setItem("token", data.token); // Lưu token
+
+      // ✅ Bước 2: Gọi /user/me để lấy role
+      const meRes = await fetch("http://localhost:8080/api/v1/user/me", {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      });
+
+      if (!meRes.ok) {
+        throw new Error("Không thể lấy thông tin người dùng.");
+      }
+
+      const meData = await meRes.json();
+      localStorage.setItem("role", meData.role); // Lưu role
+
+      alert("🟢 Đăng nhập thành công!");
+      if (onLoginSuccess) onLoginSuccess(); // Gọi callback cập nhật login
+    } catch (error) {
+      console.error("Login error:", error);
+      alert(`❌ Lỗi: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -38,9 +79,10 @@ const LoginForm = ({ onLoginSuccess, onSwitchToRegister }) => {
           />
           <button
             type="submit"
-            className="w-full bg-blue-700 text-white py-3 rounded-lg hover:bg-blue-800 transition"
+            disabled={loading}
+            className="w-full bg-blue-700 text-white py-3 rounded-lg hover:bg-blue-800 transition disabled:opacity-50"
           >
-            Đăng nhập
+            {loading ? "Đang xử lý..." : "Đăng nhập"}
           </button>
         </form>
         <p className="text-center text-sm text-gray-600">
