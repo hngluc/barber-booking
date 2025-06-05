@@ -32,10 +32,10 @@ export default function Header({ isLoggedIn, onLogout }) {
         <a href="#" className="hover:text-blue-500">Nụ cười DV</a>
       </nav>
       <div className="flex items-center">
-        {role === "ADMIN" && (
-          <Link to="/admin">
+        {isLoggedIn && role === "ADMIN" && (
+        <Link to="/admin">
             <Button className="ml-2 bg-red-600 hover:bg-red-700">Quản trị</Button>
-          </Link>
+        </Link>
         )}
         {isLoggedIn ? (
           <Button className="ml-4" onClick={handleLogout}>Đăng xuất</Button>
