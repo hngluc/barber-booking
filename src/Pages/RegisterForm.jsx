@@ -1,32 +1,52 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ Thêm useNavigate
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
-  const navigate = useNavigate(); // ✅ Khởi tạo navigate
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-
   const [error, setError] = useState("");
 
+  // ✅ Bổ sung handleChange
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (form.password !== form.confirmPassword) {
       setError("❌ Mật khẩu không khớp");
       return;
     }
 
-    alert(`✅ Đăng ký thành công cho ${form.name}`);
-    console.log("Register form data:", form);
-    navigate("/login"); // ✅ Chuyển hướng sau khi đăng ký
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          password: form.password,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || "Lỗi đăng ký");
+      }
+
+      alert("✅ Đăng ký thành công!");
+      navigate("/login");
+    } catch (err) {
+      setError(`❌ ${err.message}`);
+    }
   };
 
   return (
@@ -89,7 +109,7 @@ const RegisterForm = () => {
         <p className="text-center text-sm text-gray-600">
           Đã có tài khoản?{" "}
           <button
-            onClick={() => navigate("/login")} // ✅ Chuyển hướng khi bấm nút
+            onClick={() => navigate("/login")}
             className="text-blue-600 hover:underline font-medium"
             type="button"
           >
