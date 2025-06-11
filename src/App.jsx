@@ -16,6 +16,7 @@ import Detail from "./Pages/Detail";
 import ServiceDetail from "./Pages/ServiceDetail";
 import BookingForm from "./Pages/BookingForm";
 import Header from "./components/Header"; 
+import Dashboard from './Pages/Dashboard';
 
 function AppContent() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -75,7 +76,7 @@ function AppContent() {
         <Route path="/detail" element={<Detail />} />
         <Route path="/service/:serviceId" element={<ServiceDetail />} />
         <Route path="/booking" element={<BookingForm />} />
-        <Route path="/admin" element={<div className="p-10">Trang Quản Trị</div>} />
+        <Route path="/dashboard" element={<Dashboard  />} />
       </Routes>
     </>
   );
