@@ -1,55 +1,65 @@
-import React, { useState } from 'react';
+// src/App.jsx
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
-  useNavigate
+  useNavigate,
+  useLocation,
 } from 'react-router-dom';
 
-import BookingForm from "./components/BookingForm"; // Đảm bảo đường dẫn này chính xác
+import Home from "./Pages/Home";
 import LoginForm from "./Pages/LoginForm";
 import RegisterForm from "./Pages/RegisterForm";
+import Detail from "./Pages/Detail";
+import ServiceDetail from "./Pages/ServiceDetail";
+import BookingForm from "./Pages/BookingForm";
+import Header from "./components/Header"; 
+import Dashboard from './Pages/Dashboard';
 
-// Tạo một component con để có thể sử dụng hook useNavigate
 function AppContent() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation(); 
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
 
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
-    navigate("/"); // Chuyển hướng đến trang chính (BookingForm) sau khi đăng nhập thành công
+    navigate("/");
   };
 
-  // Tùy chọn: Thêm hàm logout để dễ dàng kiểm thử
   const handleLogout = () => {
+    localStorage.clear();
     setIsLoggedIn(false);
-    navigate("/login"); // Chuyển về trang đăng nhập sau khi logout
+    navigate("/login");
   };
+
+  const hideHeaderRoutes = ["/login", "/register"];
+  const shouldShowHeader = !hideHeaderRoutes.includes(location.pathname);
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Bạn có thể đặt nút Logout ở đây hoặc trong BookingForm/Navbar */}
-      {/* {isLoggedIn && (
-        <button onClick={handleLogout} className="absolute top-4 right-4 bg-red-500 text-white p-2 rounded">
-          Đăng xuất
-        </button>
-      )} */}
-
+    <>
+    {shouldShowHeader && (
+      <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+    )}
+      
       <Routes>
-        <Route
-          path="/"
-          element={
-            isLoggedIn ? <BookingForm /> : <Navigate replace to="/login" />
-          }
-        />
+        <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
         <Route
           path="/login"
           element={
             !isLoggedIn ? (
-              <LoginForm onLoginSuccess={handleLoginSuccess} />
+              <LoginForm
+                onLoginSuccess={handleLoginSuccess}
+                onSwitchToRegister={() => navigate("/register")}
+              />
             ) : (
-              <Navigate replace to="/" /> // Nếu đã đăng nhập, chuyển về trang chính
+              <Navigate replace to="/" />
             )
           }
         />
@@ -57,27 +67,23 @@ function AppContent() {
           path="/register"
           element={
             !isLoggedIn ? (
-              <RegisterForm /> // Sau khi đăng ký, RegisterForm nên tự chuyển hướng người dùng
-                               // đến trang đăng nhập hoặc tự động đăng nhập họ.
-                               // Hiện tại, nó chỉ hiển thị form.
+              <RegisterForm onSwitchToLogin={() => navigate("/login")} />
             ) : (
-              <Navigate replace to="/" /> // Nếu đã đăng nhập, chuyển về trang chính
+              <Navigate replace to="/" />
             )
           }
         />
-        {/* Route bắt các đường dẫn không khớp, chuyển hướng về trang phù hợp */}
-        <Route
-          path="*"
-          element={<Navigate replace to={isLoggedIn ? "/" : "/login"} />}
-        />
+        <Route path="/detail" element={<Detail />} />
+        <Route path="/service/:serviceId" element={<ServiceDetail />} />
+        <Route path="/booking" element={<BookingForm />} />
+        <Route path="/dashboard" element={<Dashboard  />} />
       </Routes>
-    </div>
+    </>
   );
 }
 
 function App() {
   return (
-    // Router được bọc ở ngoài cùng
     <Router>
       <AppContent />
     </Router>

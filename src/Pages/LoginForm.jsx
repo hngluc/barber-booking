@@ -1,78 +1,95 @@
 import React, { useState } from "react";
 
-// Nhận props onSwitchToRegister và onLoginSuccess từ App.jsx
-const LoginForm = ({ onSwitchToRegister, onLoginSuccess }) => {
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
+const LoginForm = ({ onLoginSuccess, onSwitchToRegister }) => {
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Gửi API đăng nhập tại đây và kiểm tra kết quả
-    // Giả sử đăng nhập thành công:
-    alert(`🟢 Đăng nhập thành công với email: ${form.email}`);
-    console.log("Login form data:", form);
-    if (onLoginSuccess) {
-      onLoginSuccess(); // Gọi hàm này để App.jsx cập nhật state isLoggedIn
+    setLoading(true);
+
+    try {
+      // Bước 1: Gửi yêu cầu đăng nhập
+      const response = await fetch("http://localhost:8080/api/v1/auth/authenticate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.message || "Đăng nhập thất bại.");
+      }
+
+      const data = await response.json();
+      localStorage.setItem("token", data.token); // Lưu token
+
+      // ✅ Bước 2: Gọi /user/me để lấy role
+      const meRes = await fetch("http://localhost:8080/api/v1/user/me", {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      });
+
+      if (!meRes.ok) {
+        throw new Error("Không thể lấy thông tin người dùng.");
+      }
+
+      const meData = await meRes.json();
+      localStorage.setItem("role", meData.role); // Lưu role
+
+      alert("🟢 Đăng nhập thành công!");
+      if (onLoginSuccess) onLoginSuccess(); // Gọi callback cập nhật login
+    } catch (error) {
+      console.error("Login error:", error);
+      alert(`❌ Lỗi: ${error.message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-md">
-        <h2 className="text-2xl font-bold text-center mb-6">🔐 Đăng nhập khách hàng</h2>
-
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-blue-300 px-4">
+      <div className="w-full max-w-md bg-white rounded-xl shadow-2xl p-8 space-y-6">
+        <h2 className="text-3xl font-bold text-center text-blue-700">🔐 Đăng nhập tài khoản</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="email">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              value={form.email}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="password">
-              Mật khẩu
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              value={form.password}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-              required
-            />
-          </div>
-
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-blue-500"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Mật khẩu"
+            value={form.password}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-blue-500"
+            required
+          />
           <button
             type="submit"
-            className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
+            disabled={loading}
+            className="w-full bg-blue-700 text-white py-3 rounded-lg hover:bg-blue-800 transition disabled:opacity-50"
           >
-            Đăng nhập
+            {loading ? "Đang xử lý..." : "Đăng nhập"}
           </button>
         </form>
-
-        <p className="text-center text-sm text-gray-600 mt-4">
+        <p className="text-center text-sm text-gray-600">
           Chưa có tài khoản?{" "}
-          {/* 👇 THAY ĐỔI: Sử dụng button hoặc a với onClick */}
           <button
-            type="button" // Quan trọng: để không submit form
-            onClick={onSwitchToRegister} // Gọi hàm được truyền từ App.jsx
-            className="text-blue-500 underline hover:text-blue-700 focus:outline-none"
+            onClick={onSwitchToRegister}
+            className="text-blue-600 hover:underline font-medium"
           >
             Đăng ký ngay
           </button>
