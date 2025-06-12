@@ -1,5 +1,6 @@
+// src/components/NewsForm.jsx (updated path for apiService)
 import React, { useState, useEffect } from 'react';
-import { apiService } from '../../services/apiService';
+import { apiService } from '../../services/apiService'; // Adjusted path
 
 // Dựa trên NewsDTO và NewsService
 // NewsDTO fields: id, title, content, author, date (tự gán), imageUrl
@@ -35,82 +36,87 @@ const NewsForm = ({ existingNews, onSuccess, onCancel }) => {
 
     const newsData = { title, content, author, imageUrl };
     // NewsService không yêu cầu date từ client khi create
-    // và có thể bao gồm date khi update
-    if (isEditing) {
-        newsData.id = existingNews.id;
-        newsData.date = existingNews.date; // Giữ lại date gốc khi update
-    }
-
+    // Endpoint: POST /api/v1/admin/news hoặc PUT /api/v1/admin/news/{id}
 
     try {
       if (isEditing) {
-        await apiService.put(`/news/${existingNews.id}`, newsData); // Endpoint: PUT /api/v1/news/{id}
-        alert('News updated successfully!');
+        await apiService.put(`/admin/news/${existingNews.id}`, newsData);
       } else {
-        await apiService.post('/news', newsData); // Endpoint: POST /api/v1/news
-        alert('News created successfully!');
+        await apiService.post('/admin/news', newsData);
       }
-      onSuccess(); // Gọi callback để đóng form và refresh list
+      alert(`Tin tức đã được ${isEditing ? 'cập nhật' : 'tạo'} thành công!`);
+      if (onSuccess) onSuccess();
     } catch (err) {
-      setError(err.message);
-      alert(`Error: ${err.message}`);
+      setError(err.message || 'Không thể lưu tin tức.');
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ border: '1px solid green', padding: '15px', margin: '15px 0' }}>
-      <h3>{isEditing ? 'Edit News' : 'Create News'}</h3>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <form onSubmit={handleSubmit} className="p-6 bg-white rounded-lg shadow-md space-y-4">
+      <h3 className="text-xl font-bold text-blue-700">{isEditing ? 'Sửa tin tức' : 'Tạo tin tức mới'}</h3>
+      {error && <p className="text-red-500">{error}</p>}
+
       <div>
-        <label htmlFor="title">Title:</label><br />
+        <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">Tiêu đề:</label>
         <input
           type="text"
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
-          style={{ width: '90%', marginBottom: '10px' }}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
       <div>
-        <label htmlFor="content">Content:</label><br />
+        <label htmlFor="content" className="block text-gray-700 text-sm font-bold mb-2">Nội dung:</label>
         <textarea
           id="content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
           required
           rows="5"
-          style={{ width: '90%', marginBottom: '10px' }}
-        />
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        ></textarea>
       </div>
       <div>
-        <label htmlFor="author">Author:</label><br />
+        <label htmlFor="author" className="block text-gray-700 text-sm font-bold mb-2">Tác giả:</label>
         <input
           type="text"
           id="author"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
-          style={{ width: '90%', marginBottom: '10px' }}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
       <div>
-        <label htmlFor="imageUrl">Image URL:</label><br />
+        <label htmlFor="imageUrl" className="block text-gray-700 text-sm font-bold mb-2">URL Hình ảnh:</label>
         <input
           type="text"
           id="imageUrl"
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
-          style={{ width: '90%', marginBottom: '10px' }}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
-      <button type="submit" disabled={submitting}>
-        {submitting ? 'Submitting...' : (isEditing ? 'Update News' : 'Create News')}
-      </button>
-      <button type="button" onClick={onCancel} style={{ marginLeft: '10px' }} disabled={submitting}>
-        Cancel
-      </button>
+
+      <div className="flex space-x-4">
+        <button
+          type="submit"
+          disabled={submitting}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200"
+        >
+          {submitting ? 'Đang gửi...' : (isEditing ? 'Cập nhật tin tức' : 'Tạo tin tức')}
+        </button>
+        <button
+          type="button"
+          onClick={onCancel}
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200"
+        >
+          Hủy
+        </button>
+      </div>
     </form>
   );
 };

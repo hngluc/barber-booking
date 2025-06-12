@@ -10,12 +10,21 @@ const handleResponse = async (response) => {
   if (response.status === 204 || response.headers.get('Content-Length') === '0') { // No content
     return null;
   }
-  return response.json();
+  // Try to parse JSON, if it fails, return raw response or throw error
+  try {
+    return await response.json();
+  } catch (e) {
+    // If response is OK but not JSON (e.g., plain text success message), return it
+    if (response.ok) {
+        return await response.text(); // Return text if JSON parsing fails but response is ok
+    }
+    throw new Error('Failed to parse JSON response or unknown error');
+  }
 };
 
-// Hàm helper để lấy token (giả định bạn lưu token trong localStorage)
+// Hàm helper để lấy token (sử dụng 'token' như trong LoginForm.jsx)
 const getAuthHeaders = () => {
-  const token = localStorage.getItem('authToken'); // Thay đổi tùy theo cách bạn lưu token
+  const token = localStorage.getItem('token'); // Changed from 'authToken' to 'token'
   return {
     'Content-Type': 'application/json',
     ...(token && { 'Authorization': `Bearer ${token}` }),
@@ -50,15 +59,11 @@ export const apiService = {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: 'DELETE',
       headers: getAuthHeaders(),
-      ...(data && { body: JSON.stringify(data) }), // Cho trường hợp batch delete
+      ...(data && { body: JSON.stringify(data) }), // For batch delete
     });
-    // Delete có thể trả về 200 OK với message hoặc 204 No Content
+    // Delete can return 200 OK with message or 204 No Content
     if (response.status === 204) return null;
-    if (response.ok && response.headers.get('Content-Type')?.includes('application/json')) {
-        return response.json();
-    } else if (response.ok) {
-        return response.text(); // Cho trường hợp trả về text "Successfully Deleted"
-    }
-    return handleResponse(response); // Xử lý lỗi nếu không ok
+    if (response.ok && response.headers.get('Content-Length') === '0') return null; // Handle empty body for 200/201
+    return handleResponse(response); // Attempt to parse response even if it's not 204
   },
 };

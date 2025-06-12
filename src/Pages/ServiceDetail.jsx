@@ -1,7 +1,7 @@
 // Pages/ServiceDetail.jsx
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { services } from '../data/services';
+import { services } from '../components/data/services';
 import { useNavigate } from 'react-router-dom';
 
 
