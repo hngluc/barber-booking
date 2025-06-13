@@ -3,7 +3,7 @@ import { Card } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { Carousel } from 'react-responsive-carousel';
-import Header from "../components/Header";
+
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 export default function Home() {

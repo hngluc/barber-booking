@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
+import AdminDashboard from "../Admin/AdminDashboard";
 
 export default function Header({ isLoggedIn, onLogout }) {
   const navigate = useNavigate();

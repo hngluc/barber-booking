@@ -16,17 +16,25 @@ import Detail from "./Pages/Detail";
 import ServiceDetail from "./Pages/ServiceDetail";
 import BookingForm from "./Pages/BookingForm";
 import Header from "./components/Header"; 
-import Dashboard from './Pages/Dashboard';
+import Dashboard from './Admin/AdminDashboard';
+import BookingHistory from './Pages/BookingHistory';
+
 
 function AppContent() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const location = useLocation(); 
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
-  }, []);
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  setIsLoggedIn(!!token);
+
+  const storedUser = localStorage.getItem("user");
+  if (storedUser) {
+    setCurrentUser(JSON.parse(storedUser));
+  }
+}, []);
+
 
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
@@ -41,6 +49,8 @@ function AppContent() {
 
   const hideHeaderRoutes = ["/login", "/register"];
   const shouldShowHeader = !hideHeaderRoutes.includes(location.pathname);
+  const [currentUser, setCurrentUser] = useState(null);
+
 
   return (
     <>
@@ -76,7 +86,8 @@ function AppContent() {
         <Route path="/detail" element={<Detail />} />
         <Route path="/service/:serviceId" element={<ServiceDetail />} />
         <Route path="/booking" element={<BookingForm />} />
-        <Route path="/dashboard" element={<Dashboard  />} />
+        <Route path="/AdminDashboard" element={<Dashboard user={currentUser} />} />
+        <Route path="/booking-history" element={<BookingHistory />} />
       </Routes>
     </>
   );

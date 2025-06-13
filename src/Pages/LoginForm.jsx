@@ -30,19 +30,19 @@ const LoginForm = ({ onLoginSuccess, onSwitchToRegister }) => {
       const data = await response.json();
       localStorage.setItem("token", data.token); // Lưu token
 
-      // ✅ Bước 2: Gọi /user/me để lấy role
-      const meRes = await fetch("http://localhost:8080/api/v1/user/me", {
-        headers: {
-          Authorization: `Bearer ${data.token}`,
-        },
-      });
+      // // ✅ Bước 2: Gọi /user/me để lấy role
+      // const meRes = await fetch("http://localhost:8080/api/v1/user/me", {
+      //   headers: {
+      //     Authorization: `Bearer ${localStorage.getItem("token")}`,
+      //   },
+      // });
 
-      if (!meRes.ok) {
-        throw new Error("Không thể lấy thông tin người dùng.");
-      }
+      // if (!meRes.ok) {
+      //   throw new Error("Không thể lấy thông tin người dùng.");
+      // }
 
-      const meData = await meRes.json();
-      localStorage.setItem("role", meData.role); // Lưu role
+      // const meData = await meRes.json();
+      localStorage.setItem("role", data.user.role); // Lưu role
 
       alert("🟢 Đăng nhập thành công!");
       if (onLoginSuccess) onLoginSuccess(); // Gọi callback cập nhật login
