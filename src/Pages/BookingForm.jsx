@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
+import { useNavigate } from 'react-router-dom';
+
 
 // Danh sách kiểu tóc mẫu
 const hairstyles = [
@@ -24,23 +26,40 @@ const hairstyles = [
 ];
 
 const BookingForm = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     phone: "",
     service: "",
     barber: "",
     datetime: "",
+    customerID: 152, // ID khách hàng giả định
   });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`✅ Đặt lịch thành công cho ${form.name} vào lúc ${form.datetime}`);
-    console.log("Dữ liệu gửi:", form);
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  // Gửi API đặt lịch
+  const response = await fetch("/api/v1/orders", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(form),
+  });
+
+  if (response.ok) {
+    // ✅ Sau khi đặt lịch thành công → chuyển trang
+    navigate("/booking-history");
+  } else {
+    alert("Đặt lịch thất bại");
+  }
+};
+
 
   return (
     <div className="max-w-lg mx-auto p-6 mt-10 bg-white rounded-xl shadow-xl">
@@ -126,10 +145,7 @@ const BookingForm = () => {
           required
         />
 
-        <button
-          type="submit"
-          className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
-        >
+        <button type="submit" className="w-full bg-black text-white py-2 rounded hover:bg-gray-800">
           Đặt lịch
         </button>
       </form>
